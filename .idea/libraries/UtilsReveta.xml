@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="UtilsReveta">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../MyLibrJARs/UtilsReveta.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
