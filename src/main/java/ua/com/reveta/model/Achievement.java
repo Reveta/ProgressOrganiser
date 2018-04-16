@@ -13,7 +13,7 @@ public abstract class Achievement {
     private String description;
 
     Achievement() {
-        this.id = 0;
+        this.id = 0001;
     }
 
     @Override
@@ -32,15 +32,35 @@ public abstract class Achievement {
     }
 
 
-    public void setAchievementType(AchievementType achievementType) {
+    void setAchievementType(AchievementType achievementType) {
         this.achievementType = achievementType;
     }
 
-    public void setColor(Color color) {
+    void setColor(Color color) {
         this.color = color;
     }
 
-    public void setDescription(String description) {
+    void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public AchievementType getAchievementType() {
+        return achievementType;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
