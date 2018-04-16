@@ -6,11 +6,17 @@ public class OtherAchievement extends Achievement {
 
     public OtherAchievement() {
         super();
-        this.setAchievementType(AchievementType.EPAM_EXERCISE);
+        this.setAchievementType(AchievementType.OTHER_ACHIVMENT);
         this.setColor(Color.Light_RED);
         System.out.print("Напиши опис: ");
         this.setDescription(Utils.scanStr());
     }
 
+    @Override
+    public String toString() {
+        return Utils.BLUE + "EpamExercise{" + Utils.RESET +
+                super.toString() +
+                '}';
+    }
 
 }

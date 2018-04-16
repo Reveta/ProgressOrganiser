@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ControllerInt {
 
-    void SaveAchievement();
+    void saveAchievement();
 
-    List<Achievement> FindAchievement();
+    void findAchievement();
 
-    void OpenAchievement();
+    void openAchievement();
 
 }

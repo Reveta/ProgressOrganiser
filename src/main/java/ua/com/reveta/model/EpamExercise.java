@@ -13,5 +13,10 @@ public class EpamExercise extends Achievement {
         this.setDescription(Utils.scanStr());
     }
 
-
+    @Override
+    public String toString() {
+        return Utils.RED + "EpamExercise{" + Utils.RESET +
+                super.toString() +
+                '}';
+    }
 }

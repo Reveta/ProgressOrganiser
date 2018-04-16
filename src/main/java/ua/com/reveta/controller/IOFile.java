@@ -9,6 +9,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,12 +17,15 @@ import java.util.stream.Collectors;
 @Getter
 public class IOFile {
 
-    private int sizeAchievement;
-
+    private int numFiles;
     private static IOFile ioFile;
 
+    private IOFile() {
+        this.numFiles = findAllFiles().size();
+    }
+
     public static IOFile getTOFile() {
-        if (ioFile != null) {
+        if (ioFile == null) {
             ioFile = new IOFile();
             createFolders();
         }
@@ -29,7 +33,7 @@ public class IOFile {
         return ioFile;
     }
 
-    public void InputAchievement(Achievement achievement) {
+    void saveAchievement(Achievement achievement) {
         String way = null;
         switch (achievement.getAchievementType()) {
             case LEETCODE_EXERCISE:
@@ -47,7 +51,7 @@ public class IOFile {
 
     private void createFile(String way, Achievement achievement) {
         try {
-            File file = new File(way + String.valueOf(0001) + ".txt");
+            File file = new File(way + String.valueOf(achievement.getId()) + ".txt");
             PrintWriter printWriter = new PrintWriter(new FileWriter(file));
             printWriter.print(achievement);
             printWriter.flush();
@@ -57,12 +61,14 @@ public class IOFile {
         }
     }
 
-    public void findAchievement(int idFile) {
+    public String findAchievement(int idFile) {
+        File file;
+        String fileInfo = "";
         try {
             String id = String.valueOf(idFile);
             List<File> allFiles = findAllFiles();
 
-            File file = allFiles.stream()
+            file = allFiles.stream()
                     .filter(s -> s.getName().equals(id + ".txt"))
                     .findFirst()
                     .get();
@@ -71,20 +77,27 @@ public class IOFile {
                     new BufferedReader(
                             new FileReader(file));
 
-            String s = null;
+            String s;
             while ((s = bufferedReader.readLine()) != null) {
-                System.out.println(s);
+                fileInfo = fileInfo + ""+ s + "\n";
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return fileInfo;
     }
 
-    private List<File> findAllFiles() throws IOException {
-        return Files.walk(Paths.get(Prop.getProp("toRepository")))
-                .filter(Files::isRegularFile)
-                .map(Path::toFile)
-                .collect(Collectors.toList());
+    private List<File> findAllFiles(){
+        List<File> list = new ArrayList<>();
+        try {
+            list = Files.walk(Paths.get(Prop.getProp("toRepository")))
+                    .filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
 
@@ -97,5 +110,10 @@ public class IOFile {
         System.out.println(mkContrdir + " " + mkEpamDir + " " + mkLeetCodeDir + " " + mkOtherDir);
 
 
+    }
+
+    public int getNumFiles() {
+        this.numFiles = findAllFiles().size();
+        return numFiles;
     }
 }
