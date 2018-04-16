@@ -8,6 +8,7 @@ import ua.com.reveta.controller.IOFile;
 import ua.com.reveta.interfaces.ControllerInt;
 import ua.com.reveta.interfaces.SwitchInt;
 
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Getter
@@ -15,6 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public abstract class Achievement {
     private int id;
     private AchievementType achievementType;
+    private String data;
     private Color color;
     private String description;
 
@@ -39,6 +41,12 @@ public abstract class Achievement {
                 achievement = new OtherAchievement();
                 break;
         }
+
+        System.out.print("Напиши опис: ");
+        achievement.setDescription(new Scanner(System.in).nextLine());
+
+        System.out.println("Введи час та дату");
+        achievement.data = Utils.scanStr();
 
         return achievement;
     }
@@ -105,6 +113,7 @@ public abstract class Achievement {
     public String toString() {
         return "id=" + id + ", \n" +
                 "achievementType=" + achievementType + ", \n" +
+                "time=" + data + ", \n" +
                 "color=" + color + ", \n" +
                 "description='" + description;
     }

@@ -25,8 +25,6 @@ public class LeetCodeExercise extends Achievement {
         this.link = Utils.scanStr();
         System.out.print("Встав номер завдання: ");
         this.numLeetCode = Utils.scanInt();
-        System.out.print("Напиши опис: ");
-        this.setDescription(Utils.scanStr());
         return this;
     }
 
