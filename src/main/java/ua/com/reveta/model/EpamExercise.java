@@ -15,7 +15,7 @@ public class EpamExercise extends Achievement {
 
     @Override
     public String toString() {
-        return Utils.RED + "EpamExercise{" + Utils.RESET +
+        return Utils.RED + "EpamExercise{" + Utils.RESET + "\n" +
                 super.toString() +
                 '}';
     }

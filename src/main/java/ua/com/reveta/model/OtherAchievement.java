@@ -7,7 +7,7 @@ public class OtherAchievement extends Achievement {
     public OtherAchievement() {
         super();
         this.setAchievementType(AchievementType.OTHER_ACHIVMENT);
-        this.setColor(Color.Light_RED);
+        this.setColor(Color.BLUE);
         System.out.print("Напиши опис: ");
         this.setDescription(Utils.scanStr());
     }

@@ -19,7 +19,6 @@ public class View{
                         "\n 2. Оглянути досягнення;";
 
         System.out.println(messege);
-        while (true)
         switch (Utils.scanInt()){
             case 1: controller.saveAchievement(); break;
             case 2: controller.findAchievement(); break;

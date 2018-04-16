@@ -18,7 +18,7 @@ public abstract class Achievement {
     private Color color;
     private String description;
 
-    ControllerInt controller = new Controller();
+    static ControllerInt controller = new Controller();
 
     Achievement() {
         this.id = IOFile.getTOFile().getNumFiles()+1;
@@ -72,7 +72,8 @@ public abstract class Achievement {
         return achievementType.get();
     }
 
-    enum Color {
+    public enum Color {
+        BLUE,
         GREEN,
         YELLOW,
         Light_RED,
@@ -80,19 +81,19 @@ public abstract class Achievement {
     }
 
 
-    void setAchievementType(AchievementType achievementType) {
+   public void setAchievementType(AchievementType achievementType) {
         this.achievementType = achievementType;
     }
 
-    void setColor(Color color) {
+   public void setColor(Color color) {
         this.color = color;
     }
 
-    void setDescription(String description) {
+   public void setDescription(String description) {
         this.description = description;
     }
 
-    public int getId() {
+   public int getId() {
         return id;
     }
 
