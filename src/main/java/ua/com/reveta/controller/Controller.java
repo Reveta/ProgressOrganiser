@@ -41,17 +41,35 @@ public class Controller implements ControllerInt {
             ach.create(achievement);
         }
 
-
-
-
         ioFile.saveAchievement(achievement);
-
     }
 
     public void findAchievement() {
         System.out.println("Введи номер досягнення");
         int id = Utils.scanInt();
-        System.out.println(ioFile.findAchievement(id));
+        StringBuilder achievement = ioFile.findAchievement(id);
+//        System.out.println();
+        comfortableShowAchiv(achievement);
+    }
+
+    /**
+     * Зробив неправильно. Викорисотвую try catch для правильного відтворення.
+     * Принцип:
+     * 1. Вивести приблизно всі перші поля окрім опису(description)
+     * 2. Вивести циклом опис, методом добавлення довжини одного кроку
+     * 3. Так як останній рядок дає помилку, вивести його вручну вдруге.
+     * */
+    private void comfortableShowAchiv(StringBuilder builder){
+        int mark = 180;
+        int oneLine = 80;
+        System.out.println(builder.substring(0, mark));
+        try {
+            while (mark < builder.length()) {
+                System.out.println(builder.substring(mark, mark + oneLine));
+                mark += oneLine;
+            }
+        }catch (StringIndexOutOfBoundsException ignored){}
+        System.out.println(builder.substring(mark, builder.length()));
     }
 
     public void openAchievement() {

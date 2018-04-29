@@ -50,37 +50,30 @@ public class IOFile {
     }
 
     private void createFile(String way, Achievement achievement) {
-        try {
-            File file = new File(way + String.valueOf(achievement.getId()) + ".txt");
-            PrintWriter printWriter = new PrintWriter(new FileWriter(file));
+        File file = new File(way + String.valueOf(achievement.getId()) + ".txt");
+        try (PrintWriter printWriter = new PrintWriter(new FileWriter(file))){
             printWriter.print(achievement);
-            printWriter.flush();
-            printWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public String findAchievement(int idFile) {
+    StringBuilder findAchievement(int idFile) {
         File file;
-        String fileInfo = "";
-        try {
-            String id = String.valueOf(idFile);
-            List<File> allFiles = findAllFiles();
+        StringBuilder fileInfo = new StringBuilder();
+        List<File> allFiles = findAllFiles();
+        String id = String.valueOf(idFile);
 
-            file = allFiles.stream()
-                    .filter(s -> s.getName().equals(id + ".txt"))
-                    .findFirst()
-                    .get();
+        file = allFiles.stream()
+                .filter(s -> s.getName().equals(id + ".txt"))
+                .findFirst()
+                .get();
 
-            BufferedReader bufferedReader =
-                    new BufferedReader(
-                            new FileReader(file));
-
+        try (BufferedReader bufferedReader =
+                     new BufferedReader(new FileReader(file))){
             String s;
-            while ((s = bufferedReader.readLine()) != null) {
-                fileInfo = fileInfo + ""+ s + "\n";
-            }
+            while ((s = bufferedReader.readLine()) != null)
+            {fileInfo.append(s).append("\n");}
         } catch (IOException e) {
             e.printStackTrace();
         }
